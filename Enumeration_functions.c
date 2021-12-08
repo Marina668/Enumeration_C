@@ -1,6 +1,9 @@
-//
-// Created by Maryna on 30.11.2021.
-//
+/* File Enumeration_functions.c
+Realization of structure functions
+Done by Kostiuchenko Maryna (group computer mathematics 2)
+Date 08.12.2021
+Implementations of functions
+*/
 
 #include "Enumeration_c.h"
 

@@ -1,3 +1,10 @@
+/* File Enumeration_c.h
+Realization of enum structure and functions for it (Task 11)
+Done by Kostiuchenko Maryna (group computer mathematics 2)
+Date 08.12.2021
+Headers for enum structures and functions
+*/
+
 #ifndef ENUMERATION_C_ENUMERATION_C_H
 #define ENUMERATION_C_ENUMERATION_C_H
 
@@ -16,7 +23,6 @@ FILE *enumeration_out;
  * return 0 - from file
 */
 int console_or_file();
-
 //In file skip to the place where reading starts (all 6 tasks in one file and its need to read right task)
 void skip_to(FILE *fptr, const char *string);
 
@@ -183,7 +189,7 @@ enum UnitOfLength_c {
 };
 
 /* Input unit of length
- * @ param unit
+ * @param unit
  * result int: enumerator value */
 int input_unit_of_length(char *unit);
 //This length in meters

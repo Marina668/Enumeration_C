@@ -1,43 +1,84 @@
-//
-// Created by Maryna on 05.12.2021.
-//
+/* File Enumeration_task.functions.c
+Realization of input and output functions
+Done by Kostiuchenko Maryna (group computer mathematics 2)
+Date 08.12.2021
+Implementations of input and output functions for task 1-6
+*/
 
 #include "Enumeration_c.h"
 
-void task1_c(const char *filename_c, const char *filename_out_c, int is_console) {
+void task1_c(const char *filename, const char *filename_out, int is_console) {
     int number_of_day, number_of_month, number_of_color, number_of_piece;
     char day[N], month[N], color[N], chess_piece[N];
+    char* end;
+    char number_temp[256];
 
     if (is_console) {
         //Input from console
 
         //Input number of day
-        printf("Enter number of day: ");
-        scanf("%i", &number_of_day);
+        //if enter not type int - try again
+        while(1)
+        {
+            printf("Enter number of day:");
+            scanf("%s",number_temp);
+            number_of_day = strtod(number_temp, &end);
+            if (strcmp(end, "") != 0)             //If there is an error the value of *end will be nonzero
+                printf("try again\n");
+            else
+                break;
+        }
 
         //Input day
-        printf("Enter day: ");
+        printf("Enter day:");
         scanf("%s", day);
 
         //Input number of month
-        printf("Enter number of month:");
-        scanf("%i", &number_of_month);
+        //if enter not type int - try again
+        while(1)
+        {
+            printf("Enter number of month:");
+            scanf("%s",number_temp);
+            number_of_month = strtod(number_temp, &end);
+            if (strcmp(end, "") != 0)             //If there is an error the value of *end will be nonzero
+                printf("try again\n");
+            else
+                break;
+        }
 
         //Input month
         printf("Enter month:");
         scanf("%s", month);
 
         //Input number of color
-        printf("Enter number of color:");
-        scanf("%i", &number_of_color);
+        //if enter not type int - try again
+        while(1)
+        {
+            printf("Enter number of color:");
+            scanf("%s",number_temp);
+            number_of_color = strtod(number_temp, &end);
+            if (strcmp(end, "") != 0)             //If there is an error the value of *end will be nonzero
+                printf("try again\n");
+            else
+                break;
+        }
 
         //Input color
         printf("Enter color:");
         scanf("%s", color);
 
         //Input number of chess piece
-        printf("Enter number of chess piece:");
-        scanf("%i", &number_of_piece);
+        //if enter not type int - try again
+        while(1)
+        {
+            printf("Enter number of chess piece:");
+            scanf("%s",number_temp);
+            number_of_piece = strtod(number_temp, &end);
+            if (strcmp(end, "") != 0)             //If there is an error the value of *end will be nonzero
+                printf("try again\n");
+            else
+                break;
+        }
 
         //Input chess piece
         printf("Enter chess piece:");
@@ -46,7 +87,10 @@ void task1_c(const char *filename_c, const char *filename_out_c, int is_console)
 
     else {
         //Read from file
-        enumeration = fopen(filename_c, "r");
+        enumeration = fopen(filename, "r");
+        if(enumeration == NULL){
+            printf("Can not open file '%s'", filename);
+        }
         skip_to(enumeration, "1.");
         fscanf(enumeration, "%i", &number_of_day);
         fscanf(enumeration, "%s", day);
@@ -78,7 +122,7 @@ void task1_c(const char *filename_c, const char *filename_out_c, int is_console)
 
 
     //Write to file
-    enumeration_out = fopen(filename_out_c, "w");
+    enumeration_out = fopen(filename_out, "w");
     fprintf(enumeration_out, "1.\n");
     fprintf(enumeration_out, "Number %i corresponds to the day %s\n", number_of_day, int_2_day(number_of_day));
     fprintf(enumeration_out, "Day %s corresponds to the number %i\n", day, day_2_int(day));
@@ -115,6 +159,9 @@ void task2_c(const char *filename, const char *filename_out, int is_console) {
     } else {
         //Read from file
         enumeration = fopen(filename, "r");
+        if(enumeration == NULL){
+            printf("Can not open file '%s'", filename);
+        }
         skip_to(enumeration, "2.");
         for (int i = 0; i < 2; i++) {
             fscanf(enumeration, "%s %s", rank, type);
@@ -143,14 +190,14 @@ void task2_c(const char *filename, const char *filename_out, int is_console) {
 void task3_c(const char *filename, const char *filename_out, int is_console) {
     double length = 0.0;
     char unit[N];
+    char* end;
+    char number_temp[256];
 
     if (is_console) {
         //Input from console
 
         //Input length
-        char* end;
-        char number_temp[256];
-
+        //if enter not type int - try again
         while(1)
         {
             printf("Enter length: ");
@@ -171,6 +218,9 @@ void task3_c(const char *filename, const char *filename_out, int is_console) {
     else {
         //Read from file
         enumeration = fopen(filename, "r");
+        if(enumeration == NULL){
+            printf("Can not open file '%s'", filename);
+        }
         skip_to(enumeration, "3.");
         fscanf(enumeration, "%lf", &length);
         fscanf(enumeration, "%s", unit);
@@ -200,6 +250,9 @@ void task4_c(const char *filename, const char *filename_out, int is_console) {
     else {
         //Read case from file
         enumeration = fopen(filename, "r");
+        if(enumeration == NULL){
+            printf("Can not open file '%s'", filename);
+        }
         skip_to(enumeration, "4.");
         fscanf(enumeration, "%s", vidminok);
         fclose(enumeration);
@@ -226,6 +279,9 @@ void task5_c(const char *filename, const char *filename_out, int is_console) {
     else {
         //Read sentence from file
         enumeration = fopen(filename, "r");
+        if(enumeration == NULL) {
+            printf("Can not open file '%s'", filename);
+        }
         skip_to(enumeration, "5.");
         fgets(str, sizeof(str), enumeration);
         fclose(enumeration);
@@ -245,6 +301,8 @@ void task6_c(const char *filename, const char *filename_out, int is_console) {
     char cur_course[N], order[N];
     enum Order_c orders_arr[N];
     int number_of_orders;
+    char* end;
+    char number_temp[256];
 
     double x_, y_, t, distance;
     double speed;
@@ -263,17 +321,26 @@ void task6_c(const char *filename, const char *filename_out, int is_console) {
         //Input orders and add them to array of orders
         for (int i = 0; i < number_of_orders; i++) {
             printf("Order:");
-            scanf("%s", order);
+            scanf("%", order);
             orders_arr[i] = input_order(order);
         }
 
         //Input speed
-        printf("Enter speed: ");
-        scanf("%lf", &speed);
+        //if enter not type int - try again
+        while(1)
+        {
+            printf("Enter speed:");
+            scanf("%s",number_temp);
+            speed = strtod(number_temp, &end);
+            if (strcmp(end, "") != 0)             //If there is an error the value of *end will be nonzero
+                printf("try again\n");
+            else
+                break;
+        }
 
         //Input how many time ship go each course and put to array of times
         for (int i = 0; i < 4; i++) {
-            printf("How many time ship go %s", int_2_course(North + i));
+            printf("How many time ship go %s:", int_2_course(North + i));
             scanf("%lf", &t);
             time[i] = t;
         }
@@ -281,6 +348,9 @@ void task6_c(const char *filename, const char *filename_out, int is_console) {
     else {
         //Read from file
         enumeration = fopen(filename, "r");
+        if(enumeration == NULL){
+            printf("Can not open file '%s'", filename);
+        }
         skip_to(enumeration, "6.");
         fscanf(enumeration, "%s", cur_course);
         number_of_orders = 5;
@@ -294,7 +364,6 @@ void task6_c(const char *filename, const char *filename_out, int is_console) {
             fscanf(enumeration, "%lf", &t);
             time[i] = t;
         }
-
         fclose(enumeration);
     }
 
